@@ -54,6 +54,27 @@ We can add in three ways
   3. Run the Server:
   
 	     python manage.py runserver
+	     
+  4. Add your app into installed app(project->settings):
+  
+    INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'your app name here' 
+    ]
+    
+  5. ***create html forms(registerdata.html and detailpage.html)***
+            
+   >Now, your all html files should be placed in template folder. so, create a template folder in your app folder and then                  create a another folder with your appname under template folder.
+   
+   
+  
+  
+            
        
    
 
