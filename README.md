@@ -71,7 +71,7 @@ We can add in three ways
             
    >Now, your all html files should be placed in template folder. so, create a template folder in your app folder and then                  create a another folder with your appname under template folder.
    
-   ![templates image ](templates.png)
+   ![templates image ](https://github.com/uppugundurulokesh/Django_Bootstrap_form_basicprocedure/blob/master/templates.PNG)
    
    
   
