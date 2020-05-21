@@ -69,7 +69,11 @@ We can add in three ways
     
   5. ***create html forms(registerdata.html and detailpage.html)***
             
-   >Now, your all html files should be placed in template folder. so, create a template folder in your app folder and then                  create a another folder with your appname under template folder.
+   > Now, your all html files should be placed in templates folder. so, create a template folder in your app folder and then                  create a another folder with your appname under templates folder.
+   
+   > Place all the html files in this created app folder under template folder
+   
+   > If you want to integrate boostrap for your html web page then place online or offline bootstrapy style links in html header tag.
    
    ![templates image ](https://github.com/uppugundurulokesh/Django_Bootstrap_form_basicprocedure/blob/master/templates.PNG)
    
