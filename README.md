@@ -69,13 +69,58 @@ We can add in three ways
     
   5. ***create html forms(registerdata.html and detailpage.html)***
             
-   > Now, your all html files should be placed in templates folder. so, create a template folder in your app folder and then                  create a another folder with your appname under templates folder.
+   > Now, your all html files should be placed in templates folder. so, create a templates folder in your app folder and then                  create a another folder with your appname under templates folder.
    
-   > Place all the html files in this created app folder under template folder
+   > Place all the html files in this created app folder under templates folder
    
-   > If you want to integrate boostrap for your html web page then place online or offline bootstrapy style links in html header tag.
+   > If you want to integrate boostrap for your html web page then place online or offline bootstrap style links in html header tag.
    
    ![templates image ](https://github.com/uppugundurulokesh/Django_Bootstrap_form_basicprocedure/blob/master/templates.PNG)
+   
+   
+   6. ***implement models.py file:***
+   > Model is nothing but data. So, a model class’s fields map to database fields, By using this fields columns of table is created in admin database
+   
+   > In this models.py file we create one class for map to dabase fields. By using this class name table name is created with this fields.
+   
+    from django.db import models
+
+    # Create your models here.
+    class studentdata(models.Model):
+	firstName = models.CharField(max_length=50)
+	lastName = models.CharField(max_length=40)
+	userName = models.CharField(max_length=40)
+	password = models.CharField(max_length=40)
+	mailId = models.CharField(max_length=40)
+	phone = models.IntegerField(max_length=40)
+	age = models.IntegerField(max_length=40)
+
+	def __str__(self):
+		return self.lastName+' '+self.firstName+' '+self.userName+' '+self.mailId+' '+str(self.phone)+' '+str(self.age)
+		
+7. ***Register a Model class in Django Admin: ***
+> created model class should be registered in django admin. so, we have to implement admin.py file as below,
+
+    from django.contrib import admin
+    from dbtest.models import studentdata # import model class from your app
+
+
+    # Register your models here.
+    admin.site.register(studentdata)
+    
+8. ***Sync with admin Database***
+> Now, we have to sync the created model class with admin database using makemigrations and migrate, using below commands in command prompt
+
+* Makemigrations: It is used to create a migration file that contains code for the tabled schema of a model
+         
+      python manage.py makemigrations
+
+* Migrate: It creates table according to the schema defined in the migration file.
+		
+      python manage.py migrate
+
+
+   
    
    
   
