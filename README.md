@@ -78,6 +78,33 @@ We can add in three ways
    ![templates image ](https://github.com/uppugundurulokesh/Django_Bootstrap_form_basicprocedure/blob/master/templates.PNG)
    
    
+   ***registerdata.html***
+   
+   	<body>
+	<div class="container">
+	  <h2>Register Form</h2>
+	  <form action="{% url 'registerdata' %}" method="POST">
+		{% csrf_token %}
+	    <div class="form-group">
+	      <label for="firstName" class='bg'>firstName:</label>
+	      <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Enter First Name" style="width:30%">
+	    </div>
+	    <div class="form-group">
+	      <label for="lastName" class='bg'>lastName:</label>
+	      <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Enter Last Name" style="width:30%">
+	    </div>
+
+	    <input type="submit" name="submit"value = "SAVE">
+	  </form>
+	</div>  
+	</body>
+	
+  ***detailpage.html***
+  
+	<body>
+		<h2>This is {{ bio.lastName }} @ welcome </h2>
+	</body>
+   
    6. ***implement models.py file:***
    > Model is nothing but data. So, a model class’s fields map to database fields, By using this fields columns of table is created in admin database
    
@@ -87,16 +114,12 @@ We can add in three ways
 
     # Create your models here.
     class studentdata(models.Model):
-	firstName = models.CharField(max_length=50)
-	lastName = models.CharField(max_length=40)
-	userName = models.CharField(max_length=40)
-	password = models.CharField(max_length=40)
-	mailId = models.CharField(max_length=40)
-	phone = models.IntegerField(max_length=40)
-	age = models.IntegerField(max_length=40)
-
+	
+	firstName=models.CharField(max_length=50)
+	lastName=models.CharField(max_length=50)
+	
 	def __str__(self):
-		return self.lastName+' '+self.firstName+' '+self.userName+' '+self.mailId+' '+str(self.phone)+' '+str(self.age)
+		return self.firstName+" "+self.lastName
 		
 7. ***Register a Model class in Django Admin: ***
 > created model class should be registered in django admin. so, we have to implement admin.py file as below,
@@ -137,21 +160,18 @@ We can add in three ways
 
     # Create your views here.
     def registerdata(request):
-	#bio = studentdata.objects.all()
-	if request.method == 'POST':
-		firstName = request.POST['firstName']
-		lastName = request.POST['lastName']
-		userName = request.POST['userName']
-		mailId = request.POST['mailId']
-		phone = request.POST['phone']
-		age = request.POST['age']
-		bio = {'firstName':firstName,'lastName' : lastName,'userName':userName,'age':age,'mailId':mailId,'phone':phone}
-		print(bio)
-		obj = studentdata(firstName=firstName,lastName=lastName,userName=userName,mailId=mailId,phone=phone,age=age)
+	if request.method=='POST':
+		firstName=request.POST['firstName']
+		lastName=request.POST['lastName']
+
+		bio={'firstName':firstName,'lastName':'lastName'}
+		obj=studentdata(firstName=firstName,lastName=lastName)
 		obj.save()
-		return render(request,'dbtest/detailpage.html',{'bio':bio})
-	
-	return render(request, 'dbtest/registerdata.html',{})
+		return render(request,'practapp/detailpage.html',{'bio':bio})
+
+
+	return render(request,'practapp/registerdata.html',{})
+
 	
 In views.py file we create one function name with registerdata. In this function we post the all html form feilds of data into model classes with dictionary formate and this model class data saved into admin database. Once registerdata saved then it will navigate to detailpage.html otherwise it will navigate to registerdata.html file
 
