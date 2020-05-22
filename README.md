@@ -118,6 +118,52 @@ We can add in three ways
 * Migrate: It creates table according to the schema defined in the migration file.
 		
       python manage.py migrate
+      
+9. ***configure the url's***
+>To Present the data 'views' which is mapped to url's pattern. Edit the url.py file as follow,
+
+    from django.contrib import admin
+    from django.urls import path
+    from dbtest import views
+    urlpatterns = [
+        path('admin/', admin.site.urls),
+        path('registerdata/',views.registerdata,name='registerdata'),
+    ]
+10. ***configure the views.py file***
+>After complete the url.py file we have to implemement views.py files. views.py working like a controller for controlling the all the navigations. In url.py file we declare a path for calling the views.regiserdata so, that function should be implemement in views.py file
+
+    from django.shortcuts import render
+    from dbtest.models import studentdata
+
+    # Create your views here.
+    def registerdata(request):
+	#bio = studentdata.objects.all()
+	if request.method == 'POST':
+		firstName = request.POST['firstName']
+		lastName = request.POST['lastName']
+		userName = request.POST['userName']
+		mailId = request.POST['mailId']
+		phone = request.POST['phone']
+		age = request.POST['age']
+		bio = {'firstName':firstName,'lastName' : lastName,'userName':userName,'age':age,'mailId':mailId,'phone':phone}
+		print(bio)
+		obj = studentdata(firstName=firstName,lastName=lastName,userName=userName,mailId=mailId,phone=phone,age=age)
+		obj.save()
+		return render(request,'dbtest/detailpage.html',{'bio':bio})
+	
+	return render(request, 'dbtest/registerdata.html',{})
+	
+In views.py file we create one function name with registerdata. In this function we post the all html form feilds of data into model classes with dictionary formate and this model class data saved into admin database. Once registerdata saved then it will navigate to detailpage.html otherwise it will navigate to registerdata.html file
+
+11. ***Run the server and test the app***
+> Open command prompt the type the follow command:- **python manage.py runserver**. Open Chrome browser then enter the local host path:- https://127.0.0.1:8000/registerdata
+
+> If it working fine, then fill the form and click on save button, and then check it admin database for data saved or not
+
+> Now, check django admin databse is data saved or not, Open https://127.0.0.1:8000/admin  login the database using your superuser credintials.
+
+> If data saved then you done a great job!, Thank you.....!
+
 
 
    
